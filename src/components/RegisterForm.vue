@@ -117,7 +117,7 @@ export default {
         age: 'required|min_value:18|max_value:100',
         password: 'required|min:3|max:32',
         confirm_password: 'password_mismatch:@password',
-        country: 'required|country_excluded:Ukraine',
+        country: 'required|country_excluded:USA',
         tos: 'tos',
       },
       userData: {

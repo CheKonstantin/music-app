@@ -53,7 +53,11 @@ export default {
   methods: {
     ...mapMutations(['toggleAuthApp']),
     signOut() {
-      this.$store.dispatch('signOut');
+      this.$store.dispatch('signOut', {
+        router: this.$router,
+        route: this.$route,
+      });
+
       if (this.$route.meta.requiresAuth) {
         this.$router.push({ name: 'home' });
       }

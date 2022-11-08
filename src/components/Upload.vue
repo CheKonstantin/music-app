@@ -70,8 +70,7 @@ export default {
   methods: {
     upload($event) {
       this.is_dragover = false;
-      const { files } = [...$event.dataTransfer.files];
-      // console.log($event.dataTransfer.files);
+      const files = [...$event.dataTransfer.files];
       files.forEach((file) => {
         if (file.type !== 'audio/mpeg') {
           return;

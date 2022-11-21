@@ -21,7 +21,8 @@ module.exports = {
             },
         ],
         quotes: ['error', 'single'],
-        'linebreak-style': ['error', 'windows'],
+        'linebreak-style': ['error', 'unix'],
+        'no-multiple-empty-lines': ['error', { max: 2, maxEOF: 1 }],
         'operator-linebreak': [
             'error',
             'after',

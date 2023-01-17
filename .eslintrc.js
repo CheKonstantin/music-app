@@ -19,9 +19,7 @@ module.exports = {
       'error',
       'after',
       {
-        overrides: {
-          ':': 'before',
-        },
+        overrides: { '?': 'before', ':': 'before' },
       },
     ],
   },

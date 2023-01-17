@@ -86,6 +86,8 @@ export default {
     };
   },
 
+  props: ['addSong'],
+
   methods: {
     upload($event) {
       this.is_dragover = false;
@@ -133,7 +135,11 @@ export default {
               comment_count: 0,
             };
             song.url = await task.snapshot.ref.getDownloadURL();
-            await songsCollection.add(song);
+            const songRef = await songsCollection.add(song);
+
+            const snapshot = await songRef.get();
+            this.addSong(snapshot);
+
             this.uploads[uploadIndex].variant = 'bg-green-400';
             this.uploads[uploadIndex].icon = 'fa fa-check';
             this.uploads[uploadIndex].text_class = 'text-green-400';

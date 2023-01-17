@@ -59,14 +59,34 @@ export default {
     };
   },
   async created() {
-    const snapshot = await songsCollection.get();
+    this.getSongs();
+    window.addEventListener('scroll', this.handleScroll);
+  },
 
-    snapshot.forEach((document) => {
-      this.songs.push({
-        docID: document.id,
-        ...document.data(),
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+
+  methods: {
+    handleScroll() {
+      const { scrollTop, offsetHeight } = document.documentElement;
+      const { innerHeight } = window;
+      const bottomOfWindow =
+        Math.round(scrollTop) + innerHeight === offsetHeight;
+      if (bottomOfWindow) {
+        console.log('bottom');
+      }
+    },
+    async getSongs() {
+      const snapshot = await songsCollection.get();
+
+      snapshot.forEach((document) => {
+        this.songs.push({
+          docID: document.id,
+          ...document.data(),
+        });
       });
-    });
+    },
   },
 };
 </script>

@@ -28,7 +28,15 @@ export default createStore({
   },
 
   getters: {
-    showAuthApp: (state) => state.showAuthApp,
+    // showAuthApp: (state) => state.showAuthApp,
+
+    playing: (state) => {
+      if (state.sound.playing) {
+        return state.sound.playing();
+      }
+
+      return false;
+    },
   },
 
   actions: {
@@ -75,6 +83,18 @@ export default createStore({
       commit('newSong', payload);
 
       state.sound.play();
+    },
+
+    async toggleAudio({ state }) {
+      if (!state.sound.playing) {
+        return;
+      }
+
+      if (state.sound.playing()) {
+        state.sound.pause();
+      } else {
+        state.sound.play();
+      }
     },
   },
 });

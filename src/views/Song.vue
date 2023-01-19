@@ -8,6 +8,7 @@
     <div class="container mx-auto flex items-center">
       <!-- Play/Pause Button -->
       <button
+        @click.prevent="newSong(song)"
         type="button"
         class="z-50 h-24 w-24 text-3xl bg-white text-black rounded-full focus:outline-none"
       >
@@ -25,7 +26,7 @@
     <div class="bg-white rounded border border-gray-200 relative flex flex-col">
       <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
         <!-- Comment Count -->
-        <span class="card-title">Comments (15)</span>
+        <span class="card-title">Comments ({{ song.comment_count }})</span>
         <i class="fa fa-comments float-right text-green-400 text-2xl"></i>
       </div>
       <div class="p-6">
@@ -94,10 +95,10 @@
 
 <script>
 import { songsCollection, auth, commentsCollection } from '@/includes/firebase';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
-  name: ['Song'],
+  name: 'Song',
   data() {
     return {
       song: {},
@@ -138,6 +139,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['newSong']),
     async addComment(values, { resetForm }) {
       this.comment_show_alert = true;
       this.comment_in_submission = true;
@@ -153,6 +155,11 @@ export default {
       };
 
       await commentsCollection.add(comment);
+      this.song.comment_count += 1;
+      await songsCollection.doc(this.$route.params.id).update({
+        comment_count: this.song.comment_count,
+      });
+
       this.getComments();
 
       this.comment_in_submission = false;

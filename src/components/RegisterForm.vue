@@ -20,7 +20,10 @@
         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
         placeholder="Enter Name"
       />
-      <ErrorMessage class="text-red-600" name="name" />
+      <ErrorMessage
+        class="text-red-600"
+        name="name"
+      />
     </div>
     <!-- Email -->
     <div class="mb-3">
@@ -31,7 +34,10 @@
         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
         placeholder="Enter Email"
       />
-      <ErrorMessage class="text-red-600" name="email" />
+      <ErrorMessage
+        class="text-red-600"
+        name="email"
+      />
     </div>
     <!-- Age -->
     <div class="mb-3">
@@ -41,19 +47,30 @@
         name="age"
         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
       />
-      <ErrorMessage class="text-red-600" name="age" />
+      <ErrorMessage
+        class="text-red-600"
+        name="age"
+      />
     </div>
     <!-- Password -->
     <div class="mb-3">
       <label class="inline-block mb-2">Password</label>
-      <vee-field name="password" :bails="false" v-slot="{ field, errors }">
+      <vee-field
+        name="password"
+        :bails="false"
+        v-slot="{ field, errors }"
+      >
         <input
           type="password"
           class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
           placeholder="Password"
           v-bind="field"
         />
-        <div class="text-red-600" v-for="error in errors" :key="error">
+        <div
+          class="text-red-600"
+          v-for="error in errors"
+          :key="error"
+        >
           {{ error }}
         </div>
       </vee-field>
@@ -67,7 +84,10 @@
         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
         placeholder="Confirm Password"
       />
-      <ErrorMessage class="text-red-600" name="confirm_password" />
+      <ErrorMessage
+        class="text-red-600"
+        name="confirm_password"
+      />
     </div>
     <!-- Country -->
     <div class="mb-3">
@@ -82,7 +102,10 @@
         <option value="Germany">Germany</option>
         <option value="Ukraine">Ukraine</option>
       </vee-field>
-      <ErrorMessage class="text-red-600" name="country" />
+      <ErrorMessage
+        class="text-red-600"
+        name="country"
+      />
     </div>
     <!-- TOS -->
     <div class="mb-3 pl-6">
@@ -92,9 +115,18 @@
         value="1"
         class="w-4 h-4 float-left -ml-6 mt-1 rounded"
       />
-      <label class="inline-block">Accept terms of service</label>
+      <i18n-t
+        class="inline-block"
+        keypath="register.accept"
+        tag="label"
+      >
+        <a href="#">{{ $t('register.TOS') }}</a>
+      </i18n-t>
     </div>
-    <ErrorMessage class="text-red-600" name="tos" />
+    <ErrorMessage
+      class="text-red-600"
+      name="tos"
+    />
 
     <button
       :disabled="reg_in_submission"
@@ -153,3 +185,4 @@ export default {
   },
 };
 </script>
+
